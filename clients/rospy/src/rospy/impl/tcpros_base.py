@@ -507,9 +507,9 @@ class TCPROSServer(object):
                 header = read_ros_handshake_header(sock, BytesIO(), buff_size)
             
             if 'topic' in header:
-                err_msg = self.topic_connection_handler(sock, client_addr, header)
+                err_msg = self.topic_connection_handler(sock, client_addr, header, use_uds=True)
             elif 'service' in header:
-                err_msg = self.service_connection_handler(sock, client_addr, header)
+                err_msg = self.service_connection_handler(sock, client_addr, header, use_uds=True)
             else:
                 err_msg = 'no topic or service name detected'
             if err_msg:
